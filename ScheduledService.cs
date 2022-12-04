@@ -47,6 +47,9 @@ public class ScheduledService : BackgroundService
         Console.WriteLine("A scheduler has been stopped.");
     }
 
+    [DisallowConcurrentExecution]
+    // Use DisallowConcurrentExecution attribute to prevent Quartz.NET from trying to run the same job concurrently.
+    // https://www.quartz-scheduler.net/documentation/quartz-3.x/tutorial/more-about-jobs.html#job-state-and-concurrency
     public class HelloJob : IJob
     {
         public async Task Execute(IJobExecutionContext context) =>
